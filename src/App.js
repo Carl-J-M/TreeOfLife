@@ -1,10 +1,11 @@
 import React from 'react';
 import TreeContainer from './containers/TreeContainer';
+import "./App.css"
 
 function App() {
   return (
     <div className="App">
-        <h1>Taxonomy of Life Tree Graph</h1>
+        <h1 className="pageHeading">Taxonomy of Life Tree</h1>
         <TreeContainer/>
     </div>
   );

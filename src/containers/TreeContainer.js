@@ -1,6 +1,7 @@
 import React from 'react';
 import TreeDisplay from '../components/TreeDisplay';
-import '../styles/TreeContainer.css'
+import '../App.css'
+import { identifier } from '@babel/types';
 class TreeContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -8,80 +9,83 @@ class TreeContainer extends React.Component {
       data: {}
     };
     this.onClick = this.onClick.bind(this);
+    this.inititalizeKingdoms = this.inititalizeKingdoms.bind(this);
   }
 
   componentDidMount() {
-    const url = "https://api.gbif.org/v1/species";
+    this.inititalizeKingdoms();
+  }
 
-    fetch(url)
-      .then(res => res.json())
-      .then(apiData =>
-        this.setState({
-          data: {
-            name: "Kingdoms",
-            children: this.getKingdoms(apiData["results"])
+  inititalizeKingdoms(){
+       const url = "https://api.gbif.org/v1/species";
+
+       fetch(url)
+         .then(res => res.json())
+         .then(apiData =>
+           this.setState({
+             data: {
+               name: "Kingdoms",
+               gProps: {
+                 className: "rootNode",
+                 onClick: this.inititalizeKingdoms
+               },
+               children: this.formatRank(this.filterKingdom(apiData["results"]))
+             }
+           })
+         )
+         .catch(err => console.error);
+  }
+  formatRank(data) {
+      
+      const formattedData = data.reduce((acc, element) => {
+          if (element.taxonomicStatus == "ACCEPTED") {
+                acc.push({
+                    name: element.canonicalName,
+                    apiKey: element.key,
+                    className: "node",
+
+                    children: []
+                })
           }
-        })
-      )
-      .catch(err => console.error);
+          return acc;
+      },[])
+      
+      return formattedData;
+  }
+  filterKingdom(data) {
+      const filteredData = data.filter(element => {
+            return (element.rank == "KINGDOM")
+      })
+      return filteredData;
   }
 
-  getKingdoms(data) {
-    const kingdoms = data.reduce((acc, element) => {
-      if (element.rank == "KINGDOM" && element.taxonomicStatus == "ACCEPTED") {
-        acc.push({
-          name: element.canonicalName,
-          banana: element.kingdomKey,
-          children: []
-        });
-      }
-      return acc;
-    }, []);
-    return kingdoms;
-  }
-  getPhylums(data) {
-      const phylums = data.reduce((acc, element) => {
-        if (element.rank == "PHYLUM" && element.taxonomicStatus == "ACCEPTED") {
-            acc.push({
-                name: element.canonicalName,
-                banana: element.phylumKey,
-                children: []
-            })
-        }
-        return acc;
-    }, [])
-    console.log("getPhylums", phylums);
-    return phylums;
-  }
 
-    onClick(event, nodeKey) {
-        this.fetchChildrenOfKingdom(nodeKey)
-    }
+  getChildrenOfCurrent(nodeKey){
 
-    fetchChildrenOfKingdom(key){
-        const url = `https://api.gbif.org/v1/species/${key}/children`;
-            fetch(url)
+      const url = `https://api.gbif.org/v1/species/${nodeKey}/children`
+      fetch(url)
               .then(res => res.json())
               .then(apiData =>
                 this.setState(prevState => {
-                  return {
-                    data: Object.assign({}, prevState.data, {
-                      children: prevState.data.children.map(kingdom => {
-                          console.log("outside if", key, kingdom.banana)
-                        if (kingdom.banana == key) {
-                            console.log("inside if", kingdom.key)
-                          return Object.assign({}, kingdom, {
-                            children: this.getPhylums(apiData.results)
-                          });
-                        }
-                        return kingdom;
-                      })
-                    })
-                  };
-                })
-              )
-              .catch(err => console.error);
-            
+                    return {
+                      data: {
+                        name: prevState.data.children.find(
+                          element => element.apiKey == nodeKey
+                        ).name,
+                        gProps: {
+                          onClick: this.inititalizeKingdoms,
+                          className: "node"
+                        },
+                        children: this.formatRank(apiData.results)
+                      }
+                    };
+                }));
+
+  }
+
+    onClick(event, nodeKey) {
+
+        this.getChildrenOfCurrent(nodeKey);
     }
 
   render() {
