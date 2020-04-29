@@ -17,7 +17,7 @@ const TreeDisplay = props => {
       <Tree
         data={props.data}
         height={800}
-        width={1200}
+        width={1100}
         keyProp="apiKey"
         labelProp="name"
         gProps={{
