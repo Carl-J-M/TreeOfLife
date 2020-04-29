@@ -24,9 +24,9 @@ class TreeContainer extends React.Component {
       .then(apiData =>
         this.setState({
           data: {
-            name: "Kingdoms",
+            name: "LUCA (Last Universal Common Ancestor)",
             gProps: {
-              className: "rootNode",
+              className: "node",
               onClick: this.inititalizeKingdoms
             },
             children: this.formatChildren(
@@ -56,7 +56,7 @@ class TreeContainer extends React.Component {
 
   formatParent(apiData) {
     return {
-      name: apiData.canonicalName,
+      name: apiData.canonicalName.toUpperCase(),
       apiKey: apiData.key,
       className: "node",
       gProps: {

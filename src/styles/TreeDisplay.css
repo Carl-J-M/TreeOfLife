@@ -3,8 +3,28 @@
 	stroke-width: 1.5px;
 }
 
+.rootNode {
+    fill: black;
+    font-size: 2em;
+}
+.node text{
+    fill: white;
+    font-weight: 300;
+    font-size: 2em;
+    letter-spacing: 0.3em;
+    transform: translateX(20%);
+    transform: translateY(20%);
+}
+.node circle {
+    fill: white;
+    stroke-width: 8px;
+    stroke: white;
+
+}
 div.custom-container {
-    background-color: green;
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     width: 100vw;
     fill: white;
 }
@@ -18,7 +38,7 @@ g.custom circle {
 g.custom text {
 	font-size: 1em;
 	background-color: #444;
-	fill: black;
+	fill: white;
 	text-shadow: 0 1px 4px black;
 }
 
@@ -28,8 +48,11 @@ g.custom .node {
 
 path.link {
 	fill: none;
-	stroke: #2593B8;
+	stroke: white;
 	stroke-width: 1.5px;
 }
 
+svg {
+    margin-left: 8em;
+}
 

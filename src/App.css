@@ -1,5 +1,12 @@
 .pageHeading {
     width: 100vw;
     text-align: center;
-    font-size: 5em;
+    font-size: 3em;
+    padding-top: 1em;
+    color: white;
+    margin: 0px;
+    padding-bottom: 1em;
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1CB5E0, #000046); 
 }

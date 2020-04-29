@@ -7,7 +7,7 @@ import "../styles/TreeDisplay.css";
 
 const TreeDisplay = props => {
   if (!props.data) {
-    return <p>Didn't get props.species[3]</p>;
+    return <p>No data to show.</p>;
   }
 
 
@@ -16,8 +16,8 @@ const TreeDisplay = props => {
     <div className="custom-container">
       <Tree
         data={props.data}
-        height={500}
-        width={800}
+        height={800}
+        width={1200}
         keyProp="apiKey"
         labelProp="name"
         gProps={{
@@ -25,8 +25,9 @@ const TreeDisplay = props => {
           onClick: props.onClick
         }}
         animated
-        duration={500}
+        duration={800}
         easing={easeElastic}
+        className="treeDisplay"
       />
     </div>
   );
