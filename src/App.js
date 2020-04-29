@@ -5,7 +5,7 @@ import "./App.css"
 function App() {
   return (
     <div className="App">
-        <h1 className="pageHeading">Taxonomy of Life Tree</h1>
+        <h1 className="pageHeading">LIFETAXON</h1>
         <TreeContainer/>
     </div>
   );

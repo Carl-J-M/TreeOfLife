@@ -56,3 +56,11 @@ svg {
     margin-left: 8em;
 }
 
+g.custom text {
+    font-weight: 300;
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    transform: translateX(0.3em);
+
+
+}

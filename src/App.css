@@ -1,7 +1,10 @@
 .pageHeading {
     width: 100vw;
     text-align: center;
-    font-size: 3em;
+    font-weight: 300;
+    font-size: 2em;
+    letter-spacing: 1em;
+    border-bottom: solid white 1px;
     padding-top: 1em;
     color: white;
     margin: 0px;
