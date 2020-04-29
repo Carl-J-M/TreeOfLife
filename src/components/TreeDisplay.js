@@ -1,7 +1,6 @@
 import React from "react";
 import Tree from "react-tree-graph";
 import "react-tree-graph/dist/style.css";
-import { easeElastic } from "d3-ease";
 import "../App.css";
 import "../styles/TreeDisplay.css";
 
@@ -26,7 +25,6 @@ const TreeDisplay = props => {
         }}
         animated
         duration={800}
-        easing={easeElastic}
         className="treeDisplay"
       />
     </div>
