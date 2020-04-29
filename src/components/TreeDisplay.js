@@ -3,6 +3,7 @@ import Tree from "react-tree-graph";
 import "react-tree-graph/dist/style.css";
 import { easeElastic } from "d3-ease";
 import "../App.css";
+import "../styles/TreeDisplay.css";
 
 const TreeDisplay = props => {
   if (!props.data) {
@@ -24,7 +25,7 @@ const TreeDisplay = props => {
           onClick: props.onClick
         }}
         animated
-        duration={200}
+        duration={500}
         easing={easeElastic}
       />
     </div>
